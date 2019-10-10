@@ -292,7 +292,11 @@ function checkForGlobalizationError (obj) {
 }
 
 (function init () {
-    GlobalizationProxy.GlobalizationProxy.setLocale(locale);
+	tryDoAction(GlobalizationProxy.GlobalizationProxy.setLocale, locale, function() {
+    // succeeded
+	}, function() {
+    // failed
+	});
 })();
 
 require('cordova/exec/proxy').add('Globalization', module.exports);
